@@ -106,31 +106,42 @@ router.post("/healthinfo", (req, res, next) => {
 });
 
 router.post("/rankdoctors", (req, res) => {
-  points = 0;
   var firstName = req.body.fname.toLowerCase();
   var lastName = req.body.lname.toLowerCase();
   var fullname = firstName + lastName;
 
-  console.log(fullname);
-  var doctor = new DoctorsInfo({
-    fname: req.body.fname.toLowerCase(),
-    lname: req.body.lname.toLowerCase(),
-    speciality: req.body.speciality,
-    fullname: fullname,
-    points: points + 1
-  });
-
-  // if new recoomendation start point with one else incresase point accesing data from database
-  // console.log(doctor);
-  var promise = doctor.save();
-  promise.then(doctors => {
-    console.log(doctor);
-
-    DoctorsInfo.findOne({ fullname: req.body.fullname }).then((err, doctor) => {
-      console.log("Repeated");
-      console.log(doctors);
-    });
+  DoctorsInfo.count({ fullname: fullname }, function(err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      if (result >= 1) {
+        console.log("already recommended");
+        DoctorsInfo.update(
+          { fullname: fullname },
+          { $inc: { points: 1 } },
+          (err, result) => {
+            if (err) {
+              console.log(err);
+            } else {
+              console.log(result);
+            }
+          }
+        );
+      } else {
+        console.log(fullname);
+        var doctor = new DoctorsInfo({
+          fname: req.body.fname.toLowerCase(),
+          lname: req.body.lname.toLowerCase(),
+          speciality: req.body.speciality,
+          fullname: fullname,
+          points: 1
+        });
+        var promise = doctor.save();
+        promise.then(doctor => {
+          console.log(doctor);
+        });
+      }
+    }
   });
 });
-
 module.exports = router;
