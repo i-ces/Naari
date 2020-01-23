@@ -110,6 +110,11 @@ router.post("/rankdoctors", (req, res) => {
   var lastName = req.body.lname.toLowerCase();
   var fullname = firstName + lastName;
 
+  DoctorsInfo.find().sort({ points: 1 });
+  DoctorsInfo.find({}, (err, result) => {
+    console.log(result);
+  });
+
   DoctorsInfo.count({ fullname: fullname }, function(err, result) {
     if (err) {
       console.log(err);
