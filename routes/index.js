@@ -32,6 +32,38 @@ router.get("/signup", (req, res, next) => {
   res.render("signup");
 });
 
+router.get("/recommendeddoctors", (req, res, next) => {
+  specialists = {
+    "Dr. Nutan Thakur Sharma": "Obsterician & Gyanaecologist",
+    "Dr. Swasti Sharma": "Gynaecologist and fertility specialist",
+    "Dr. Bal Krishna Shah": "Obs & Gynaecology",
+    "Dr. Manor Din Shaiyed": "Obstetrics & Gynecologist",
+    "Prof. Dr. Achala Vaidya": "Senior Consultant Gynecologist/Obstetrician",
+    "Dr. Jyoti Agrawal": "Obstetrics and Gynecology",
+    "Prof. Dr. Padam Raj Pant": "Obstetrics and Gynecologist",
+    "Dr. Sabina Shrestha": "OBSTETRICIAN & GYNECOLOGIST",
+    "Dr. Jitendra Pariyar": "Obsterician & Gyanaecologist",
+    "Dr. Meenu Suwal": "Consultant Gynecologist & Obstetrician"
+  };
+  doctors = [
+    "Dr. Nutan Thakur Sharma",
+    "Dr. Swasti Sharma",
+    "Dr. Bal Krishna Shah",
+    "Dr. Manor Din Shaiyed",
+    "Prof. Dr. Achala Vaidya",
+    "Dr. Jyoti Agrawal",
+    "Prof. Dr. Padam Raj Pant",
+    "Dr. Sabina Shrestha",
+    "Dr. Jitendra Pariyar",
+    "Dr. Meenu Suwal"
+  ];
+
+  res.render("recommendedDoctors", { specialists, doctors });
+});
+
+router.get("/healthinfo", (req, res, next) => {
+  res.render("healthinfo");
+});
 router.post("/healthinfo", (req, res, next) => {
   var healthinfo = new HealthInfo({
     pressure: req.body.pressure,
@@ -70,10 +102,6 @@ router.post("/healthinfo", (req, res, next) => {
   } else {
     res.render("lean", { healthyWeight: healthyWeight });
   }
-});
-
-router.get("/healthinfo", (req, res, next) => {
-  res.render("healthinfo");
 });
 
 module.exports = router;
