@@ -4,9 +4,72 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
     <title>Health Info</title>
   </head>
   <body>
-    status of current health
+    <form action="/healthinfo" method="POST" class="container">
+      <div class="form-group">
+        <label for="name">Blood Pressure</label>
+        <input
+          type="text"
+          class="form-control"
+          id="bloodpressure"
+          placeholder="High or Low"
+          name="pressure"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="weight">Weight</label>
+        <input
+          type="number"
+          class="form-control"
+          id="weight"
+          placeholder="Enter your Weight"
+          name="weight"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Height</label>
+        <div>
+          Feet
+          <span class="inlineinput">
+            <input
+              type="text"
+              name="feet"
+              style="display: inline; width: 50px;"
+            />
+          </span>
+          Inches
+          <span class="inlineinput">
+            <input
+              type="text"
+              name="inches"
+              style="display: inline; width: 50px;"
+            />
+          </span>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary"
+        style="background-color: #0c5460;"
+      >
+        Get recommendation
+      </button>
+    </form>
   </body>
 </html>
