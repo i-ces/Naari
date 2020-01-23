@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var HealthInfo = require("../models/HealthInfo");
+var DoctorsInfo = require("../models/Doctors");
 
 heightAndWeight = {
   137: [31.7, 3.2],
@@ -102,6 +103,34 @@ router.post("/healthinfo", (req, res, next) => {
   } else {
     res.render("lean", { healthyWeight: healthyWeight });
   }
+});
+
+router.post("/rankdoctors", (req, res) => {
+  points = 0;
+  var firstName = req.body.fname.toLowerCase();
+  var lastName = req.body.lname.toLowerCase();
+  var fullname = firstName + lastName;
+
+  console.log(fullname);
+  var doctor = new DoctorsInfo({
+    fname: req.body.fname.toLowerCase(),
+    lname: req.body.lname.toLowerCase(),
+    speciality: req.body.speciality,
+    fullname: fullname,
+    points: points + 1
+  });
+
+  // if new recoomendation start point with one else incresase point accesing data from database
+  // console.log(doctor);
+  var promise = doctor.save();
+  promise.then(doctors => {
+    console.log(doctor);
+
+    DoctorsInfo.findOne({ fullname: req.body.fullname }).then((err, doctor) => {
+      console.log("Repeated");
+      console.log(doctors);
+    });
+  });
 });
 
 module.exports = router;
