@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Recommendation</title>
+  </head>
+  <body>
+    <%if (healthyWeight.pressure == "high") { %> <%- include
+    partials/highPressure.ejs %> <% } %> <%if (healthyWeight.pressure ==
+    "normal") { %> <% include partials/normalPressure.ejs %> <% } %> <%if
+    (healthyWeight.pressure == "low") { %> <% include partials/lowPressure.ejs
+    %> <% } %>
+    <h1>Preacutions for women with higher height weight ratio</h1>
+    <p style="font-size:40px">
+      Your weight is <%= healthyWeight.weight %>
+    </p>
+    <p style="font-size:40px">
+      Average weight for height of <%= healthyWeight.height %> is
+      <%=healthyWeight.averageWeight %> but weight within range of <%=
+      healthyWeight.averageWeight - healthyWeight.deviationOfWeight %> -
+      <%=healthyWeight.averageWeight + healthyWeight.deviationOfWeight %> is
+      considered normal
+    </p>
+
+    <p style="font-size:40px">
+      You have more weight than required normal weight
+    </p>
+  </body>
+</html>
