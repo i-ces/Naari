@@ -2,6 +2,8 @@ var express = require("express");
 var router = express.Router();
 var HealthInfo = require("../models/HealthInfo");
 var DoctorsInfo = require("../models/Doctors");
+var User = require("../models/Login");
+const cronjob = require("../cronjob");
 
 heightAndWeight = {
   137: [31.7, 3.2],
@@ -29,8 +31,31 @@ router.get("/", (req, res, next) => {
   res.render("index", { title: "Express" });
 });
 
+router.get("/login", (req, res) => {
+  res.render("login");
+});
 router.get("/signup", (req, res, next) => {
   res.render("signup");
+});
+
+router.get("/wnotifier", (req, res) => {
+  User.find({}, (err, users) => {
+    for (var i = 0; i < users.length; i++) {
+      console.log(users[i]);
+      cronjob.cronjob(users[i].email);
+    }
+  });
+});
+router.post("/login", (req, res) => {
+  var user = new User({
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password
+  });
+  var promise = user.save();
+  promise.then(user => {
+    console.log(user);
+  });
 });
 
 router.get("/rankeddoctors", (req, res) => {
@@ -151,11 +176,5 @@ router.post("/rankdoctors", (req, res) => {
       }
     }
   });
-
-  // DoctorsInfo.find().sort({ points: 1 });
-  // DoctorsInfo.find({}, (err, rankedDoctors) => {
-  //   console.log(rankedDoctors);
-  //   res.render("rankedDoctors", { rankedDoctors });
-  // });
 });
 module.exports = router;
