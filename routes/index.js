@@ -33,6 +33,14 @@ router.get("/signup", (req, res, next) => {
   res.render("signup");
 });
 
+router.get("/rankeddoctors", (req, res) => {
+  DoctorsInfo.find().sort({ points: 1 });
+  DoctorsInfo.find({}, (err, rankedDoctors) => {
+    console.log(rankedDoctors);
+    res.render("rankedDoctors", { rankedDoctors: rankedDoctors });
+  });
+});
+
 router.get("/recommendeddoctors", (req, res, next) => {
   specialists = {
     "Dr. Nutan Thakur Sharma": "Obsterician & Gyanaecologist",
@@ -110,11 +118,6 @@ router.post("/rankdoctors", (req, res) => {
   var lastName = req.body.lname.toLowerCase();
   var fullname = firstName + lastName;
 
-  DoctorsInfo.find().sort({ points: 1 });
-  DoctorsInfo.find({}, (err, result) => {
-    console.log(result);
-  });
-
   DoctorsInfo.count({ fullname: fullname }, function(err, result) {
     if (err) {
       console.log(err);
@@ -148,5 +151,11 @@ router.post("/rankdoctors", (req, res) => {
       }
     }
   });
+
+  // DoctorsInfo.find().sort({ points: 1 });
+  // DoctorsInfo.find({}, (err, rankedDoctors) => {
+  //   console.log(rankedDoctors);
+  //   res.render("rankedDoctors", { rankedDoctors });
+  // });
 });
 module.exports = router;
