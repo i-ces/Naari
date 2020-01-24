@@ -3,6 +3,7 @@ var router = express.Router();
 var HealthInfo = require("../models/HealthInfo");
 var DoctorsInfo = require("../models/Doctors");
 var User = require("../models/Login");
+var Query = require("../models/Queries");
 const cronjob = require("../cronjob");
 
 heightAndWeight = {
@@ -36,6 +37,21 @@ router.get("/login", (req, res) => {
 });
 router.get("/signup", (req, res, next) => {
   res.render("signup");
+});
+
+router.get("/query", (req, res, next) => {
+  res.render("query");
+});
+
+router.post("/query", (req, res, next) => {
+  var query = new Query({
+    username: req.body.username,
+    query: req.body.query
+  });
+  var promise = query.save();
+  promise.then(query => {
+    console.log(query);
+  });
 });
 
 router.get("/wnotifier", (req, res) => {
