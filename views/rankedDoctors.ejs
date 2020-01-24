@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+            body {
+              background-color: white;
+              margin-left: 40%
+            }
+            
+            h1 {
+              color: black;
+              
+            }
+            td {
+                text-align: center
+            }
+            </style>
+    <title>Ranked Doctors</title>
+  </head>
+  <body style="margin: auto ">
+    <table style="margin: auto">
+   
+        <table>
+                <thead>
+                        <tr>
+                          <th><h1>Rank</h1></th>
+                          <th><h1>Name</h1></th>
+                          <th><h1>Speciality</h1></th>
+                        </tr>
+                      </thead>
+            <tbody>
+        <% for( var i = 0; i<rankedDoctors.length ; i++)  {%>
+
+                <tr>
+               <td> <h2><%= i+1 %></h2></td>
+              <td>  <h2><%= rankedDoctors[i].fname %> <%= rankedDoctors[i].lname %></h2></td>
+             <td>   <h2><%= rankedDoctors[i].speciality %></h2></td>
+            </tr>
+       <% } %></tbody>
+    
+    </table>
+  </body>
+</html>
