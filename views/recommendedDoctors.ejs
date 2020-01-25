@@ -18,7 +18,14 @@
     <title>Health Info</title>
   </head>
   <body>
-    <form action="/rankdoctors" method="POST" class="container">
+    <% include partials/navbar.ejs %>
+
+    <form
+      action="/rankdoctors"
+      method="POST"
+      class="container"
+      style="margin: 10%"
+    >
       <div class="form-group">
         <label for="name">First Name</label>
         <input

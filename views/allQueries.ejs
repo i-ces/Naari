@@ -8,12 +8,14 @@
     <link rel="stylesheet" href="../public/stylesheets/w3.css" />
     <title>Document</title>
 </head>
-<body style="margin: 5% 20% ; font-size: 30px">
+<body style=" font-size: 30px">
+        <% include partials/navbar.ejs %>
+    <div style="margin: 5% 20% ">
     <% for(var i=0;i<queries.length; i++){ %>
         <h3 style="font-size: 30px">
         <%= queries[i].query %>
         </h3>
-       <% } %>
+       <% } %></div>
 
 
        <h2 >Do you have any queries</h2>

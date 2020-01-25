@@ -27,7 +27,14 @@
         <title>Login</title>
       </head>
       <body>
-        <form action="/ask" method="POST" class="container">
+        <% include partials/navbar.ejs %>
+
+        <form
+          action="/ask"
+          method="POST"
+          class="container"
+          style="margin:10% 20%"
+        >
           <div class="form-group">
             <label for="name">Name</label>
             <input
