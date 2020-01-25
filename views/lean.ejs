@@ -7,26 +7,35 @@
     <title>Recommendation</title>
   </head>
   <body>
-    <%if (healthyWeight.pressure == "high") { %> <%- include
-    partials/highPressure.ejs %> <% } %> <%if (healthyWeight.pressure ==
-    "normal") { %> <% include partials/normalPressure.ejs %> <% } %> <%if
-    (healthyWeight.pressure == "low") { %> <% include partials/lowPressure.ejs
-    %> <% } %>
+    <% include partials/navbar.ejs %>
 
-    <h1>Precautions for womens with low height weight ratio</h1>
-    <p style="font-size:40px">
-      Your weight is <%= healthyWeight.weight %>
-    </p>
+    <div style="margin: 8% 20%">
+      <%if (healthyWeight.pressure == "high") { %> <%- include
+      partials/highPressure.ejs %> <% } %> <%if (healthyWeight.pressure ==
+      "normal") { %> <% include partials/normalPressure.ejs %> <% } %> <%if
+      (healthyWeight.pressure == "low") { %> <% include partials/lowPressure.ejs
+      %> <% } %>
 
-    <p style="font-size:40px">
-      Average weight for height of <%= healthyWeight.height %> is
-      <%=healthyWeight.averageWeight %> but weight within range of <%=
-      healthyWeight.averageWeight - healthyWeight.deviationOfWeight %> -
-      <%=healthyWeight.averageWeight + healthyWeight.deviationOfWeight %> is
-      considered normal
-    </p>
-    <p style="font-size:40px">
-      You have lower body weight than required normal weight for a healthy women
-    </p>
+      <h3 style="font-size: 40px">
+        Precautions for womens with low height weight ratio
+      </h3>
+      <ul style="font-size:30px">
+        <li>
+          Your weight is <%= healthyWeight.weight %>
+        </li>
+
+        <li class="container" style="font-size:30px">
+          Average weight for height of <%= healthyWeight.height %> is
+          <%=healthyWeight.averageWeight %> but weight within range of <%=
+          healthyWeight.averageWeight - healthyWeight.deviationOfWeight %> -
+          <%=healthyWeight.averageWeight + healthyWeight.deviationOfWeight %> is
+          considered normal
+        </li>
+        <li>
+          You have lower body weight than required normal weight for a healthy
+          women
+        </li>
+      </ul>
+    </div>
   </body>
 </html>

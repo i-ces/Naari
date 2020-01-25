@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link rel="stylesheet" href="../public/stylesheets/w3.css" />
+    <title>Document</title>
+</head>
+<body style="margin: 5% 20% ; font-size: 30px">
+    <% for(var i=0;i<queries.length; i++){ %>
+        <h3 style="font-size: 30px">
+        <%= queries[i].query %>
+        </h3>
+       <% } %>
+
+
+       <h2 >Do you have any queries</h2>
+       <a href="/ask" > <button class="w3-bar-item w3-button"  style="background-color: #0c5460;"
+        >Ask</button></a>
+</body>
+</html>

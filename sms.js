@@ -4,9 +4,9 @@ const sms = phoneNumber => {
   client.messages
     .create({
       body:
-        "This website stores cookies on your computer If you decline, your information won’t be tracked when you visit this website. A single cookie will be used in your browser to remember your preference not to be tracked.",
-      from: process.env.FROM,
-      to: phoneNumber
+        " हामी प्रत्येक महिलालाई  गर्भावस्थाको हरेक चरणमा सही जानकारी प्रदान गरेर सुरक्षित महसुस गराउँछौं",
+      to: "+9779864420261",
+      from: process.env.FROM
     })
     .then(message => console.log(message))
     .catch(err => {

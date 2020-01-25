@@ -5,7 +5,8 @@ var DoctorsInfo = require("../models/Doctors");
 var User = require("../models/Login");
 var Query = require("../models/Queries");
 const cronjob = require("../cronjob");
-
+const sms = require("../sms");
+const nodemailer = require("../nodemailer");
 heightAndWeight = {
   137: [31.7, 3.2],
   140: [34.2, 3.4],
@@ -27,6 +28,8 @@ heightAndWeight = {
   183: [72.55, 7.25]
 };
 
+var query;
+
 /* GET home page. */
 router.get("/", (req, res, next) => {
   res.render("index", { title: "Express" });
@@ -39,8 +42,21 @@ router.get("/signup", (req, res, next) => {
   res.render("signup");
 });
 
-router.get("/query", (req, res, next) => {
-  res.render("query");
+router
+  .route("/ask")
+  .get((req, res, next) => {
+    res.render("query");
+  })
+  .post((req, res) => {
+    query = req.body.query;
+    console.log(query);
+    res.redirect("/queries");
+  });
+
+router.get("/queries", (req, res) => {
+  Query.find({}, (err, queries) => {
+    res.render("allQueries", { queries });
+  });
 });
 
 router.post("/query", (req, res, next) => {
@@ -51,9 +67,23 @@ router.post("/query", (req, res, next) => {
   var promise = query.save();
   promise.then(query => {
     console.log(query);
+    cronjob.cronjob(query.query);
+  });
+
+  Query.find({}, (err, queries) => {
+    console.log(queries);
   });
 });
 
+router.post("/post-ans", (req, res) => {
+  var ans = req.body.ans;
+
+  console.log(ans);
+  res.redirect("/");
+});
+router.get("/post-ans", (req, res) => {
+  res.render("post-ans", { query });
+});
 router.get("/wnotifier", (req, res) => {
   User.find({}, (err, users) => {
     for (var i = 0; i < users.length; i++) {
@@ -65,13 +95,17 @@ router.get("/wnotifier", (req, res) => {
 router.post("/login", (req, res) => {
   var user = new User({
     username: req.body.username,
-    email: req.body.email,
+    phone: req.body.phone,
     password: req.body.password
   });
+  // sms.sms(+9779864420261);
+
   var promise = user.save();
   promise.then(user => {
     console.log(user);
+    console.log("happy coding");
   });
+  res.render("healthinfo");
 });
 
 router.get("/rankeddoctors", (req, res) => {
@@ -190,6 +224,17 @@ router.post("/rankdoctors", (req, res) => {
           console.log(doctor);
         });
       }
+    }
+  });
+});
+
+router.get("/sms", (req, res) => {
+  User.find({}, (err, user) => {
+    console.log("send sms to current user");
+    for (var i = 0; i < user.length; i++) {
+      console.log("+" + user[i].phone);
+
+      // sms.sms(+9779864420261);
     }
   });
 });

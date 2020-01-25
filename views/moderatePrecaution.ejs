@@ -7,23 +7,29 @@
     <title>Recommendation</title>
   </head>
   <body>
-    <h1>Moderate Precautions</h1>
-    <%if (healthyWeight.pressure === "high") { %> <% include
-    partials/highPressure.ejs %> <% } %> <%if (healthyWeight.pressure ==
-    "normal") { %> <% include partials/normalPressure.ejs %> <% } %> <%if
-    (healthyWeight.pressure == "low") { %> <% include partials/lowPressure.ejs
-    %> <% } %>
-    <p style="font-size:40px">
-      Your weight is <%= healthyWeight.weight %>
-    </p>
-    <p style="font-size:40px">
-      Average weight for height of <%= healthyWeight.height %> is
-      <%=healthyWeight.averageWeight %> but weight within range of <%=
-      healthyWeight.averageWeight - healthyWeight.deviationOfWeight %> -
-      <%=healthyWeight.averageWeight + healthyWeight.deviationOfWeight %> is
-      considered normal
-    </p>
+    <% include partials/navbar.ejs %>
 
-    <p style="font-size:40px">Congratulations !! You have normal body weight</p>
+    <div style="margin: 8% 20%">
+      <h1>Moderate Precautions</h1>
+      <%if (healthyWeight.pressure === "high") { %> <% include
+      partials/highPressure.ejs %> <% } %> <%if (healthyWeight.pressure ==
+      "normal") { %> <% include partials/normalPressure.ejs %> <% } %> <%if
+      (healthyWeight.pressure == "low") { %> <% include partials/lowPressure.ejs
+      %> <% } %>
+      <p style="font-size:40px">
+        Your weight is <%= healthyWeight.weight %>
+      </p>
+      <p style="font-size:40px">
+        Average weight for height of <%= healthyWeight.height %> is
+        <%=healthyWeight.averageWeight %> but weight within range of <%=
+        healthyWeight.averageWeight - healthyWeight.deviationOfWeight %> -
+        <%=healthyWeight.averageWeight + healthyWeight.deviationOfWeight %> is
+        considered normal
+      </p>
+
+      <p style="font-size:40px">
+        Congratulations !! You have normal body weight
+      </p>
+    </div>
   </body>
 </html>

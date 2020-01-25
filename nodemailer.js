@@ -1,4 +1,4 @@
-const cronjob = email => {
+const nodemailer = (email, query) => {
   const nodemailer = require("nodemailer");
 
   let transporter = nodemailer.createTransport({
@@ -6,16 +6,23 @@ const cronjob = email => {
 
     auth: {
       user: "bhawana.prs@gmail.com",
-      pass: "*****"
+      pass: ""
     }
   });
 
   mailOptions = {
     from: "bhawana.prs@gmail.com",
-    to: email,
+    to: "shivagaihre40@gmail.com",
     subject: "Alert for weekly health checkup",
-    text:
-      "Its been a week since you have been  to hospital . Please contact your doctor/gynaecologists"
+    // text: query
+    html: `
+    <div>
+      <h1>${query}</h1>
+      <a href="192.168.1.176:4000/post-ans">View question</a>
+
+      
+    </div>
+    `
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
@@ -27,4 +34,4 @@ const cronjob = email => {
   });
 };
 
-module.exports = { cronjob: cronjob };
+module.exports = nodemailer;

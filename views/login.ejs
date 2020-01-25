@@ -18,7 +18,12 @@
     <title>Login</title>
   </head>
   <body>
+    <% include partials/navbar.ejs %>
+
     <form action="/login" method="POST" class="container">
+      <h3 style="margin: 4%">
+        Register for automated weekly recommendation throught your pregnancy
+      </h3>
       <div class="form-group">
         <label for="name">Name</label>
         <input
