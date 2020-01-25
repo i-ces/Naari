@@ -234,7 +234,7 @@ router.get("/sms", (req, res) => {
     for (var i = 0; i < user.length; i++) {
       console.log("+" + user[i].phone);
 
-      // sms.sms(+9779864420261);
+      sms.sms(+9779864420261);
     }
   });
 });
